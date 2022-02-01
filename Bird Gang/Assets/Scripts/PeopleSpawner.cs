@@ -24,7 +24,14 @@ public class PeopleSpawner : MonoBehaviour
         
         minPosition = renderer.bounds.min;
         maxPosition = renderer.bounds.max;
-        centerPosition = renderer.bounds.max;
+        centerPosition = renderer.bounds.center;
+        Debug.Log("Min");
+        Debug.Log(minPosition);
+        Debug.Log("Max");
+
+        Debug.Log(maxPosition);
+        Debug.Log("Center");
+        Debug.Log(centerPosition);
     }
 
     // Update is called once per frame
@@ -43,19 +50,19 @@ public class PeopleSpawner : MonoBehaviour
     private void SpawnGoodPerson()
     {
         GameObject newGoodPerson = Instantiate(goodPersonPrefab);
-        newGoodPerson.transform.position = centerPosition
-            + new Vector3(Random.Range(minPosition.x, maxPosition.x), 1, Random.Range(minPosition.z, maxPosition.z));
-        
+        newGoodPerson.transform.position = centerPosition + new Vector3(Random.Range(minPosition.x, maxPosition.x), 0, Random.Range(minPosition.z, maxPosition.z));
         NumberGoodPeopleSpawned++;
     } 
 
     private void SpawnBadPerson()
     {
         GameObject newBadPerson = Instantiate(badPersonPrefab);
-        newBadPerson.transform.position = centerPosition
-            + new Vector3(Random.Range(minPosition.x, maxPosition.x), 1, Random.Range(minPosition.z, maxPosition.z));
+        newBadPerson.transform.parent = this.transform;
+
+        newBadPerson.transform.position =  centerPosition + new Vector3(Random.Range(minPosition.x, maxPosition.x), 0, Random.Range(minPosition.z, maxPosition.z));
         NumberBadPeopleSpawned++;
     }
+
     public void SetNumberOfGoodPeople(int numOfPeople)
     {
         NumberOfGoodPeople = numOfPeople;
