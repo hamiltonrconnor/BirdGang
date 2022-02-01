@@ -7,15 +7,19 @@ public class PeopleSpawner : MonoBehaviour
     public int NumberOfPeopleTotal;
     public int NumberOfGoodPeople;
     public int NumberOfBadPeople;
+    public int NumberOfMiniBoss;
     public GameObject badPersonPrefab;
     public GameObject goodPersonPrefab;
-  
+    public GameObject miniBossPrefab;
+    public Renderer renderer;
+
     private int NumberGoodPeopleSpawned;
     private int NumberBadPeopleSpawned;
+    private int NumberMiniBossSpawned;
     private Vector3 minPosition;
     private Vector3 maxPosition;
     private Vector3 centerPosition;
-    public Renderer renderer;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -25,31 +29,21 @@ public class PeopleSpawner : MonoBehaviour
         minPosition = renderer.bounds.min;
         maxPosition = renderer.bounds.max;
         centerPosition = renderer.bounds.center;
-        Debug.Log("Min");
-        Debug.Log(minPosition);
-        Debug.Log("Max");
 
-        Debug.Log(maxPosition);
-        Debug.Log("Center");
-        Debug.Log(centerPosition);
     }
 
     // Update is called once per frame
     void Update()
     {   
-        if (NumberGoodPeopleSpawned < NumberOfGoodPeople)
-        {
-            SpawnGoodPerson();
-        }
-        if (NumberBadPeopleSpawned < NumberOfBadPeople)
-        {
-            SpawnBadPerson();
-        }
+        
+        
+        
     }
 
     private void SpawnGoodPerson()
     {
         GameObject newGoodPerson = Instantiate(goodPersonPrefab);
+        newGoodPerson.transform.parent = this.transform;
         newGoodPerson.transform.position = centerPosition + new Vector3(Random.Range(minPosition.x, maxPosition.x), 0, Random.Range(minPosition.z, maxPosition.z));
         NumberGoodPeopleSpawned++;
     } 
@@ -58,18 +52,49 @@ public class PeopleSpawner : MonoBehaviour
     {
         GameObject newBadPerson = Instantiate(badPersonPrefab);
         newBadPerson.transform.parent = this.transform;
-
         newBadPerson.transform.position =  centerPosition + new Vector3(Random.Range(minPosition.x, maxPosition.x), 0, Random.Range(minPosition.z, maxPosition.z));
         NumberBadPeopleSpawned++;
     }
+    private void SpawnMiniBoss()
+    { 
+        GameObject newMiniBoss = Instantiate(miniBossPrefab);
+        newMiniBoss.transform.parent = this.transform;
+        newMiniBoss.transform.position = centerPosition + new Vector3(Random.Range(minPosition.x, maxPosition.x), 0, Random.Range(minPosition.z, maxPosition.z));
+        NumberMiniBossSpawned++;
+        
+    }
 
-    public void SetNumberOfGoodPeople(int numOfPeople)
+    public void fillMaxGoodPeople(int numOfPeople)
     {
         NumberOfGoodPeople = numOfPeople;
+
+        while(NumberGoodPeopleSpawned < NumberOfGoodPeople)
+        {
+            SpawnGoodPerson();
+        }
+
     }
-    public void SetNumberOfBadPeople(int numOfPeople)
+
+    public void fillMaxBadPeople(int numOfPeople)
     {
         NumberOfBadPeople = numOfPeople;
+        while (NumberBadPeopleSpawned < NumberOfBadPeople)
+        {
+            SpawnBadPerson();
+        }
+    }
+
+    public void fillMaxMiniBoss(int numOfPeople)
+    {
+        NumberOfMiniBoss = numOfPeople;
+        while (NumberMiniBossSpawned < NumberOfMiniBoss)
+        {
+            SpawnMiniBoss();
+        }
+    }
+    public int GetNumberOfMiniBoss(int numOfPeople)
+    {
+        return NumberOfMiniBoss;
     }
     public int GetNumberOfGoodPeople(int numOfPeople)
     {

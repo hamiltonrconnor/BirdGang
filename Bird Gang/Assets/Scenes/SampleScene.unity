@@ -363,6 +363,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6288113126339585409, guid: ccaa8e68aab7f419c914099c02fa024e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6288113126617291337, guid: ccaa8e68aab7f419c914099c02fa024e, type: 3}
       propertyPath: m_Name
       value: SpawnManager
