@@ -20,7 +20,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {////////////
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         //float zAxis = Input.GetAxisRaw("ZAxis");
