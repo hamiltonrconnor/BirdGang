@@ -88,12 +88,11 @@ public class FlockCEO : MonoBehaviour
         }
         List<float> clonedAttackTimes = new List<float>(attackTimes);
         // Debug.Log(clonedAttackTimes.Count);
-        Debug.Log(attackTimes.Count);
+        // Debug.Log(attackTimes.Count);
         for(int t=0;t <attackTimes.Count;t++)
         {
             if (Time.time >=clonedAttackTimes[t] +attackDelay)
             {
-          
                 usedFlockManagers[t].StopAttackPlayer();
                 freeflockManagers.Add(usedFlockManagers[t]);
                 attackedPlayers.RemoveAt(t);

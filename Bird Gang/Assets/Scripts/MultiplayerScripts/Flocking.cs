@@ -25,17 +25,22 @@ public class Flocking : MonoBehaviour
         if (!b.Contains(transform.position))
         {
             turning = true;
+            // Debug.Log("hit edge of box" + direction);
             direction = flockManager.transform.position - transform.position;
+            // Debug.Log("after rotating from box" + direction);
         } 
 
-        else if (Physics.Raycast(transform.position, this.transform.forward * 20f, out hit))
+        else if (Physics.Raycast(transform.position, this.transform.forward * 1f, out hit))
         {
             // Debug.Log("inside the raycast");
             turning = true;
+            Debug.Log("raycast detected something" + this.transform.forward + hit.normal);
+            // Debug.DrawRay(this.transform.position, this.transform.forward * 1f, Color.red);
+
             // Debug.Log(direction + "1");
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
+            Debug.Log("supposedly new direction" + direction);
             // Debug.Log(direction + "2");
-            // Debug.DrawRay(this.transform.position, this.transform.forward * 20f, Color.red);
             // Debug.Log("draw rays");
         }
         else 
@@ -43,7 +48,10 @@ public class Flocking : MonoBehaviour
 
         if(turning) 
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), flockManager.rotationSpeed * Time.deltaTime);
+            Debug.Log(direction);
+            Debug.Log(transform.rotation + "before");
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 10);
+            Debug.Log(transform.rotation + "after");
         }
         else
         {
@@ -57,7 +65,7 @@ public class Flocking : MonoBehaviour
                 ApplyRules();
             }
         }
-        transform.Translate(0, 0, Time.deltaTime * speed);   
+        transform.Translate(0, 0, Time.deltaTime * speed);  // move the object forward along its z axis 1 unit/second.
     }
 
     void ApplyRules()

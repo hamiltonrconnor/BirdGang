@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
 
     void Acceleration()
     {
-        Debug.Log("Increased acceleration: "+increasedAcceleration);
+        // Debug.Log("Increased acceleration: "+increasedAcceleration);
         // When the user presses space the birds acceleration should increase
         if (move && accelerate)
         {

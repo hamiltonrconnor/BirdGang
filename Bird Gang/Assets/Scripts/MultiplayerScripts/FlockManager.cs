@@ -68,7 +68,7 @@ public class FlockManager : MonoBehaviour
         }
         if(attacking){
             transform.LookAt(playerToAttack);
-            Debug.Log("looking at player" + this.gameObject.name);
+            // Debug.Log("looking at player" + this.gameObject.name);
         }
         else
         {
