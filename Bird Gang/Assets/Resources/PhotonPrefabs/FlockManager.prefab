@@ -52,11 +52,11 @@ MonoBehaviour:
   worldLimits: {x: 500, y: 500, z: 500}
   goalPos: {x: 0, y: 0, z: 0}
   flockingBorder: {fileID: 5025038925670119200, guid: c6827ec6cd3b3495d85f520c12cb5797, type: 3}
-  minSpeed: 17.3
-  maxSpeed: 18.9
+  minSpeed: 19.2
+  maxSpeed: 19.7
   neighbourDistance: 5.49
   neighbourAngle: 125.9
-  rotationSpeed: 4.66
+  rotationSpeed: 5
 --- !u!114 &-7083796695843234914
 MonoBehaviour:
   m_ObjectHideFlags: 0

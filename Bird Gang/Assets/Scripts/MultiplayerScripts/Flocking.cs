@@ -50,7 +50,7 @@ public class Flocking : MonoBehaviour
         {
             Debug.Log(direction);
             Debug.Log(transform.rotation + "before");
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 10);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * flockManager.rotationSpeed);
             Debug.Log(transform.rotation + "after");
         }
         else

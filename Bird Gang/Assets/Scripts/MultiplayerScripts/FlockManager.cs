@@ -25,7 +25,7 @@ public class FlockManager : MonoBehaviour
     [Range(0, 180)]
     public float neighbourAngle;
 
-    [Range(0.0f, 5.0f)]
+    [Range(0.0f, 10.0f)]
     public float rotationSpeed;    
 
     Quaternion r = Quaternion.identity ;
