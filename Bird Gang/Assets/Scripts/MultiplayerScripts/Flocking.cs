@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Flocking : MonoBehaviour
 {
-
     public FlockManager flockManager;
     float speed;
     bool turning = false;
@@ -36,8 +35,8 @@ public class Flocking : MonoBehaviour
             // Debug.Log(direction + "1");
             direction = Vector3.Reflect(this.transform.forward, hit.normal);
             // Debug.Log(direction + "2");
-            Debug.DrawRay(this.transform.position, this.transform.forward * 20f, Color.red);
-            Debug.Log("draw rays");
+            // Debug.DrawRay(this.transform.position, this.transform.forward * 20f, Color.red);
+            // Debug.Log("draw rays");
         }
         else 
             turning = false;
@@ -63,8 +62,8 @@ public class Flocking : MonoBehaviour
 
     void ApplyRules()
     {
-        GameObject[] gos;
-        gos = flockManager.allBirds;
+        GameObject[] flock;
+        flock = flockManager.allBirds;
 
         Vector3 vCentre = Vector3.zero;
         Vector3 vAvoid = Vector3.zero;
@@ -73,24 +72,23 @@ public class Flocking : MonoBehaviour
         float nAngle;
         int groupSize = 0;
 
-        foreach (GameObject go in gos)
+        foreach (GameObject bird in flock)
         {
-            if (go != this.gameObject)
+            if (bird != this.gameObject)
             {
-                nDistance = Vector3.Distance(go.transform.position, this.transform.position);
-                nAngle = Vector3.Angle(this.transform.forward,go.transform.position- this.transform.position);
+                nDistance = Vector3.Distance(bird.transform.position, this.transform.position);
+                nAngle = Vector3.Angle(this.transform.forward,bird.transform.position- this.transform.position);
                 if(nDistance <= flockManager.neighbourDistance && nAngle<flockManager.neighbourAngle)
                 {
-                    // Debug.Log(nAngle); 
-                    vCentre += go.transform.position;
+                    vCentre += bird.transform.position;
                     groupSize++;
 
                     if(nDistance < 1.0f) 
                     {
-                        vAvoid = vAvoid + (this.transform.position - go.transform.position);
+                        vAvoid = vAvoid + (this.transform.position - bird.transform.position);
                     }
 
-                    Flocking anotherFlock = go.GetComponent<Flocking>();
+                    Flocking anotherFlock = bird.GetComponent<Flocking>();
                     gSpeed = gSpeed + anotherFlock.speed;
                 }
             }

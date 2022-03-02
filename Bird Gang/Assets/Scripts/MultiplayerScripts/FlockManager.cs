@@ -48,7 +48,7 @@ public class FlockManager : MonoBehaviour
         transform.position = new Vector3(Random.Range(-worldLimits.x, worldLimits.x),
                                             Random.Range(0, worldLimits.y),                                                            
                                             Random.Range(-worldLimits.z, worldLimits.z));
-        
+        // goalPos = new Vector3(-145, 0, 20);
     }
 
     // Update is called once per frame
