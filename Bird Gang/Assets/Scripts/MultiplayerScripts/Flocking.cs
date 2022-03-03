@@ -32,16 +32,21 @@ public class Flocking : MonoBehaviour
 
         else if (Physics.Raycast(transform.position, this.transform.forward * flockManager.hitDistance, out hit))
         {
+            turning = true;
             // Debug.Log("inside the raycast");
             // turning = true;
             // Debug.Log("raycast detected something" + this.transform.forward + hit.normal);
             // Debug.DrawRay(this.transform.position, this.transform.forward * flockManager.hitDistance, Color.red);
 
             // // Debug.Log(direction + "1");
-            // direction = Vector3.Reflect(this.transform.forward, hit.normal);
+            direction = Vector3.Reflect(this.transform.forward, hit.normal);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.fixedDeltaTime * flockManager.rotationSpeed);
+
             // Debug.Log("supposedly new direction" + direction);
-            Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
-            transform.position = newPos;
+            // Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+            // transform.position = Vector3.Lerp(transform.position, newPos, 1);
+            // transform.rotation = Quaternion.LookRotation(direction);
+
             // Debug.Log(direction + "2");
             // Debug.Log("draw rays");
         }
@@ -70,6 +75,7 @@ public class Flocking : MonoBehaviour
             }
         }
         transform.Translate(0, 0, Time.deltaTime * speed);  // move the object forward along its z axis speed units/second.
+
     }
 
     void ApplyRules()

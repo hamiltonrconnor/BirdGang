@@ -25,7 +25,7 @@ public class FlockManager : MonoBehaviour
     [Range(0, 180)]
     public float neighbourAngle;
 
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 50.0f)]
     public float rotationSpeed;    
 
     [Range(0.0f, 10.0f)]
