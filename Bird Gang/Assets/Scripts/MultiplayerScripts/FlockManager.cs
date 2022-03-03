@@ -28,6 +28,9 @@ public class FlockManager : MonoBehaviour
     [Range(0.0f, 10.0f)]
     public float rotationSpeed;    
 
+    [Range(0.0f, 10.0f)]
+    public float hitDistance;  
+
     Quaternion r = Quaternion.identity ;
     private bool attacking;
 

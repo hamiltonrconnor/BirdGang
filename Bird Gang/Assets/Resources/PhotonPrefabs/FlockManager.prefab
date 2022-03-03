@@ -56,7 +56,8 @@ MonoBehaviour:
   maxSpeed: 19.7
   neighbourDistance: 5.49
   neighbourAngle: 125.9
-  rotationSpeed: 5
+  rotationSpeed: 3.4
+  hitDistance: 0.2
 --- !u!114 &-7083796695843234914
 MonoBehaviour:
   m_ObjectHideFlags: 0

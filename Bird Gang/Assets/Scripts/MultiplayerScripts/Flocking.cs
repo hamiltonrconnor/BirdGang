@@ -15,7 +15,7 @@ public class Flocking : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Bounds b = new Bounds(flockManager.transform.position, flockManager.flyLimits*2);
 
@@ -30,16 +30,18 @@ public class Flocking : MonoBehaviour
             // Debug.Log("after rotating from box" + direction);
         } 
 
-        else if (Physics.Raycast(transform.position, this.transform.forward * 1f, out hit))
+        else if (Physics.Raycast(transform.position, this.transform.forward * flockManager.hitDistance, out hit))
         {
             // Debug.Log("inside the raycast");
-            turning = true;
-            Debug.Log("raycast detected something" + this.transform.forward + hit.normal);
-            // Debug.DrawRay(this.transform.position, this.transform.forward * 1f, Color.red);
+            // turning = true;
+            // Debug.Log("raycast detected something" + this.transform.forward + hit.normal);
+            // Debug.DrawRay(this.transform.position, this.transform.forward * flockManager.hitDistance, Color.red);
 
-            // Debug.Log(direction + "1");
-            direction = Vector3.Reflect(this.transform.forward, hit.normal);
-            Debug.Log("supposedly new direction" + direction);
+            // // Debug.Log(direction + "1");
+            // direction = Vector3.Reflect(this.transform.forward, hit.normal);
+            // Debug.Log("supposedly new direction" + direction);
+            Vector3 newPos = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
+            transform.position = newPos;
             // Debug.Log(direction + "2");
             // Debug.Log("draw rays");
         }
@@ -50,8 +52,10 @@ public class Flocking : MonoBehaviour
         {
             Debug.Log(direction);
             Debug.Log(transform.rotation + "before");
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * flockManager.rotationSpeed);
+            // transform.rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.fixedDeltaTime * flockManager.rotationSpeed);
             Debug.Log(transform.rotation + "after");
+            // Debug.Log("time" + Time.fixedDeltaTime);
         }
         else
         {
@@ -65,7 +69,7 @@ public class Flocking : MonoBehaviour
                 ApplyRules();
             }
         }
-        transform.Translate(0, 0, Time.deltaTime * speed);  // move the object forward along its z axis 1 unit/second.
+        transform.Translate(0, 0, Time.deltaTime * speed);  // move the object forward along its z axis speed units/second.
     }
 
     void ApplyRules()
