@@ -8,22 +8,25 @@ public class AiController : MonoBehaviour, IPunObservable
     GameObject[] goalLocations;
 
     NavMeshAgent agent;
-    float detectionRadius = 30;
-    float fleeRadius = 10;
+    const float detectionRadius = 30;
+    const float fleeRadius = 10;
 
     public bool isMiniboss = false;
     public bool forTutorial;
+    public bool disableSerialisation = false;
 
-    public float normalSpeed = 2f;
-    public float minibossSpeed = 4f;
-    public float normalAngularSpeed = 120f;
+    const float normalSpeed = 2f;
+    const float minibossSpeed = 4f;
+    const float normalAngularSpeed = 120f;
     private bool isFleeing;
 
-    public float fleeingSpeed = 20f;
-    public float fleeingAngularSpeed = 500f;
+    const float fleeingSpeed = 20f;
+    const float fleeingAngularSpeed = 500f;
 
     private Vector3 lastSteeringTarget;
     private bool lastIsFleeing;
+
+    private float nextForcedUpdate;
 
     void ResetAgent()
     {
@@ -128,28 +131,43 @@ public class AiController : MonoBehaviour, IPunObservable
 
     void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        if (disableSerialisation)
+            return;
+
         if (stream.IsWriting)
         {
             /* Obviously only send when changed (PUN does support this) */
             if (agent.steeringTarget != lastSteeringTarget ||
-                isFleeing != lastIsFleeing)
+                isFleeing != lastIsFleeing ||
+                Time.time > nextForcedUpdate)
             {
                 stream.SendNext(agent.steeringTarget);
                 stream.SendNext(isFleeing);
+                stream.SendNext(agent.nextPosition);
+                stream.SendNext(agent.velocity);
+
                 lastSteeringTarget = agent.steeringTarget;
                 lastIsFleeing = isFleeing;
+                /* Avoid updating everyone at once. */
+                nextForcedUpdate = Time.time + UnityEngine.Random.Range(6f, 10f);
             }
         }
         else
         {
             try
             {
+                float d = (float)(PhotonNetwork.Time - info.SentServerTime);
                 agent.SetDestination((Vector3) stream.ReceiveNext());
                 SetFleeing((bool) stream.ReceiveNext());
+                Vector3 pos = (Vector3) stream.ReceiveNext();
+                Vector3 vel = (Vector3) stream.ReceiveNext();
+                agent.velocity = vel;
+                agent.nextPosition = pos + (vel * d);
             }
-            catch (Exception e)
+            catch
             {
-                Debug.LogError(e);
+                Debug.LogError($"Error deserialising agent. ({gameObject.name})" +
+                               " Ensure agents don't have PhotonTransformViews, etc.");
             }
         }
     }
