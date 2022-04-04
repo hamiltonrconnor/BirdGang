@@ -1193,11 +1193,6 @@ MonoBehaviour:
   isMiniboss: 0
   forTutorial: 0
   disableSerialisation: 0
-  normalSpeed: 2
-  minibossSpeed: 4
-  normalAngularSpeed: 120
-  fleeingSpeed: 20
-  fleeingAngularSpeed: 500
 --- !u!1001 &334245008527377123
 PrefabInstance:
   m_ObjectHideFlags: 0

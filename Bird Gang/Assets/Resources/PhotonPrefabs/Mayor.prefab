@@ -140,11 +140,6 @@ MonoBehaviour:
   isMiniboss: 1
   forTutorial: 0
   disableSerialisation: 0
-  normalSpeed: 2
-  minibossSpeed: 4
-  normalAngularSpeed: 120
-  fleeingSpeed: 20
-  fleeingAngularSpeed: 500
 --- !u!195 &-12645679936514643
 NavMeshAgent:
   m_ObjectHideFlags: 0

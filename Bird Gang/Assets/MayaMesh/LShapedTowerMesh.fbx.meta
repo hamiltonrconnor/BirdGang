@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 109d1233bc57d4765b6b08185f09d234
+guid: faf5eefd6a2e14553a894b0c63ba9943
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -14,16 +14,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: doorHandle
     second: {fileID: 2100000, guid: c14837dfa515883428e5652d93e80c72, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 7b0736f1c010c455a9f387f5f10524ec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: shopHighlights
-    second: {fileID: 2100000, guid: 7fd798ad09c894049ad2bc1c543333a0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -103,7 +93,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   humanDescription:
     serializedVersion: 3
     human: []
