@@ -45,6 +45,7 @@ public class Tutorial : MonoBehaviour
         		pc.input_lock_y = true;
 			pc.input_lock_ad = true;
 			pc.input_disable_targeting = true;
+			pc.wind_disable = true;
 			pc.SetHoveringGravity(false);
 			text.text = "Hold <b>W</b> to fly forwards through the ring.\n" +
 				"Alternately, press <b>X</b> to escape.";
@@ -97,6 +98,7 @@ public class Tutorial : MonoBehaviour
 				pc.input_lock_ad =
 				pc.input_lock_x =
 				pc.input_lock_y =
+				pc.wind_disable = 
 					false;
 			alertText.enabled = false;
 			/* Any excuse not to change the scene... */

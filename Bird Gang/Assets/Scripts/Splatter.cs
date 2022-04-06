@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class Splatter : MonoBehaviour, IPunInstantiateMagicCallback
+public class Splatter : MonoBehaviour
 {
-    private double appearTime;
-    private MeshRenderer meshRenderer;
+//    private MeshRenderer meshRenderer;
     public ParticleSystem particleSystem;
     private bool burst;
-    private Material material;
+//    private Material material;
     private const float Lifetime = 30f;
     private float endTime;
+
+    public float appearTime;
 
     private void Awake()
     {
         endTime = Time.time + Lifetime;
+        // Rely on other script to set appear time.
+        if (appearTime == 0)
+            appearTime = endTime;
+        var e = particleSystem.emission;
+        e.rateOverTime = 0;
+        burst = true;
     }
+
     private void Start()
     {
         //meshRenderer = GetComponent<MeshRenderer>();
@@ -25,37 +32,21 @@ public class Splatter : MonoBehaviour, IPunInstantiateMagicCallback
         //material.SetFloat("_index", Random.RandomRange(0, 4));
 
     }
-     void Update()
-    {
- 
-        if (Time.timeAsDouble > appearTime)
-        {
-            // Debug.Log("hello");
-            //meshRenderer.enabled =true;
-            particleSystem.gameObject.SetActive(true);
-            //particleSystem.Play();
-            if (burst)
-            {
 
-                
-                particleSystem.Emit(1);
-                burst = false;
-            }
-        }
-        
+    void Update()
+    {
         if (Time.time > endTime)
         {
             Destroy(this.gameObject);
         }
-    }
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        object[] instantiationData = info.photonView.InstantiationData;
-        appearTime = (double)instantiationData[0];
-        particleSystem.emissionRate = 0;
-        burst = true;
-        
-
-
+        else if (Time.time > appearTime)
+        {
+            particleSystem.gameObject.SetActive(true);
+            if (burst)
+            {
+                particleSystem.Emit(1);
+                burst = false;
+            }
+        }
     }
 }
