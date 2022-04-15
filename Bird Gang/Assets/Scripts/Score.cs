@@ -30,7 +30,7 @@ public class Score : MonoBehaviour
         switch (type)
         {
             case HIT.GOOD:
-                score -= 10;
+                score = UpdateScoreValueGoodPerson(score);
                 streakFlag = 0;
                 break;
             case HIT.BAD:
@@ -39,6 +39,7 @@ public class Score : MonoBehaviour
                 break;
             case HIT.MINIBOSS:
                 score += (int)(50f * fac);
+//                 score = UpdateScoreValueBadPerson(score);
                 streakFlag++;
                 targetReached.text = "NICE TEAMWORK";
                 Invoke("Hide", time);
