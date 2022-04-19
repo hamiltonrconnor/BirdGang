@@ -89,7 +89,7 @@ public class Tutorial : MonoBehaviour
 			
 			break;
 		case 5:
-			text.text = "A thief! Give them their comeuppance.";
+			text.text = "That child is littering! To defeat minibosses like him you must all ruin their day.";
 
 			FindObjectOfType<AudioManager>().Play("HitBadPpl");
 			break;
