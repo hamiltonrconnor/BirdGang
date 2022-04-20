@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7575557384085879052
 Transform:
@@ -97,6 +97,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e8a5670eea4e44a7886722cce94a5796, type: 3}
       propertyPath: m_Name
       value: beachJut
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8a5670eea4e44a7886722cce94a5796, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8a5670eea4e44a7886722cce94a5796, type: 3}
