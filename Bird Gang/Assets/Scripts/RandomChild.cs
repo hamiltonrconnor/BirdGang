@@ -13,6 +13,7 @@ public class RandomChild : MonoBehaviour
         {
             if (i == child)
             {
+                Debug.Log("DONE IT");
                 transform.GetChild(i).gameObject.SetActive(true);
             }
             else
